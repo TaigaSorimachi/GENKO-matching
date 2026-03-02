@@ -158,6 +158,10 @@ export const matchService = {
     return matchRepository.findByJob(jobId);
   },
 
+  async getCompanyApplicants(companyId: string) {
+    return matchRepository.findByCompany(companyId);
+  },
+
   async updateStatus(matchId: string, status: MatchStatus) {
     const match = await matchRepository.findById(matchId);
     if (!match) throw new NotFoundError("マッチングが見つかりませんでした");

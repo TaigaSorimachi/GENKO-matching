@@ -42,7 +42,7 @@ function MatchScoreBadge({ score }: { score?: number }) {
   if (score == null) return null;
   return (
     <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 text-xs">
-      {Math.round(score * 100)}%マッチ
+      {Math.round(score)}%マッチ
     </Badge>
   );
 }

@@ -19,6 +19,12 @@ export async function applyToJob(userId: string, jobId: string) {
   return res.json();
 }
 
+export async function getCompanyApplicants(companyId: string) {
+  const res = await fetch(`/api/match?companyId=${companyId}`);
+  if (!res.ok) throw new Error("応募者一覧の取得に失敗しました");
+  return res.json();
+}
+
 export async function updateMatchStatus(matchId: string, status: MatchStatus) {
   const res = await fetch(`/api/match/${matchId}`, {
     method: "PATCH",

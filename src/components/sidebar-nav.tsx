@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Briefcase, MessageCircle } from "lucide-react";
+import { LayoutDashboard, Briefcase, Users, MessageCircle } from "lucide-react";
 
 const navItems = [
   { href: "/company", label: "ダッシュボード", icon: LayoutDashboard },
   { href: "/company/jobs", label: "求人管理", icon: Briefcase },
+  { href: "/company/applicants", label: "応募者", icon: Users },
   { href: "/company/messages", label: "チャット", icon: MessageCircle },
 ];
 

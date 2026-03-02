@@ -62,6 +62,17 @@ export const matchRepository = {
     });
   },
 
+  findByCompany(companyId: string) {
+    return prisma.match.findMany({
+      where: { job: { companyId } },
+      include: {
+        user: { include: { skills: { include: { skill: true } } } },
+        job: { include: { company: true, skills: { include: { skill: true } } } },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  },
+
   countByCompany(companyId: string, status?: MatchStatus) {
     return prisma.match.count({
       where: {

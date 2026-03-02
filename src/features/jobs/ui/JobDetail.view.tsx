@@ -89,7 +89,7 @@ export function JobDetailView({
           <div className="flex flex-col items-end gap-1 shrink-0">
             {job.matchScore != null && (
               <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 text-sm">
-                {Math.round(job.matchScore * 100)}%マッチ
+                {Math.round(job.matchScore)}%マッチ
               </Badge>
             )}
             {job.urgency !== "NORMAL" && (

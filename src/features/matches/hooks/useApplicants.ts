@@ -18,6 +18,7 @@ export function useUpdateMatchStatus() {
       updateMatchStatus(matchId, status),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["applicants"] });
+      queryClient.invalidateQueries({ queryKey: ["companyApplicants"] });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
   });

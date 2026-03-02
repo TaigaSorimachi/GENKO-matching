@@ -109,7 +109,7 @@ export type UpdateMatchRequest = {
 
 export type MatchWithDetails = Match & {
   user: User & { skills: (UserSkill & { skill: Skill })[] };
-  job: Job & { company: Company };
+  job: Job & { company: Company; skills?: (JobSkill & { skill: Skill })[] };
 };
 
 // === Message ===
