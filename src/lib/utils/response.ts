@@ -28,8 +28,9 @@ export function errorResponse(error: unknown) {
   }
 
   console.error("Unexpected error:", error);
+  const message = error instanceof Error ? error.message : "予期しないエラーが発生しました";
   return NextResponse.json(
-    { error: { code: "INTERNAL_ERROR", message: "予期しないエラーが発生しました" } },
+    { error: { code: "INTERNAL_ERROR", message } },
     { status: 500 }
   );
 }
