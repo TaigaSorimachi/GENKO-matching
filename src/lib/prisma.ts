@@ -7,20 +7,22 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPool() {
-  const url = process.env.DATABASE_URL;
-  if (!url) throw new Error("DATABASE_URL is not set");
+  // Use individual DB_* vars if available, otherwise parse DATABASE_URL
+  if (process.env.DB_HOST) {
+    return new Pool({
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT) || 5432,
+      database: process.env.DB_NAME || "postgres",
+      user: process.env.DB_USER || "postgres",
+      password: process.env.DB_PASSWORD,
+      ...(process.env.NODE_ENV === "production" && {
+        ssl: { rejectUnauthorized: false },
+      }),
+    });
+  }
 
-  // Parse URL manually to handle special characters in password
-  const parsed = new URL(url);
   return new Pool({
-    host: parsed.hostname,
-    port: Number(parsed.port) || 5432,
-    database: parsed.pathname.slice(1),
-    user: decodeURIComponent(parsed.username),
-    password: decodeURIComponent(parsed.password),
-    ...(process.env.NODE_ENV === "production" && {
-      ssl: { rejectUnauthorized: false },
-    }),
+    connectionString: process.env.DATABASE_URL,
   });
 }
 
